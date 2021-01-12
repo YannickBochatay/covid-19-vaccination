@@ -1,4 +1,4 @@
-# covid-19
+# covid-19 vaccination
 Interactive chart for COVID-19 vaccination data in France
 
 
