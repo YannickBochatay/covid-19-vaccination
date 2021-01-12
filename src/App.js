@@ -6,15 +6,17 @@ import Alert from "react-bootstrap/Alert"
 import Spinner from 'reactjs-simple-spinner'
 import DataContext from "./DataContext"
 import Chart from "./Chart"
-import Form from "./Form"
 import Twitter from "./Twitter"
 import moment from "moment"
+import zones from "./regions"
 
+const storagePrefix = "vaccination-"
 class App extends React.Component {
 
   state = {
     data : [],
-    zones : this.getLocalData("zones") || [{ value : "FRA", label : "France" }],
+    nationalData : [],
+    zones : this.getLocalData("zones") || zones,
     dateRange : this.getLocalData("dateRange") || { startDate : moment("2021-01-11"), endDate : moment() },
     scale : this.getLocalData("scale") || "linear",
     chartHeight : null,
@@ -26,7 +28,7 @@ class App extends React.Component {
 
   getLocalData(key) {
     try {
-      const data = localStorage.getItem(key)
+      const data = localStorage.getItem(storagePrefix + key)
       return data && JSON.parse(data)
     } catch (e) {
       console.warn("Problème d'accès au localStorage")
@@ -35,14 +37,19 @@ class App extends React.Component {
 
   setLocalData(key, value) {
     try {
-      localStorage.setItem(key, JSON.stringify(value))
+      localStorage.setItem(storagePrefix + key, JSON.stringify(value))
     } catch (e) {
       console.warn("Problème d'accès au localStorage")
     }
   }
 
-  async fetchData() {
+  async fetchRegionalData() {
     const res = await fetch("https://www.data.gouv.fr/fr/datasets/r/16cb2df5-e9c7-46ec-9dbf-c902f834dab1")
+    return await res.json()
+  }
+
+  async fetchNationalData() {
+    const res = await fetch("https://www.data.gouv.fr/fr/datasets/r/b39196f2-97c4-42f4-8dee-5eb07e823377")
     return await res.json()
   }
 
@@ -51,8 +58,8 @@ class App extends React.Component {
     this.setState({ chartHeight, isFetching : true })
 
     try {
-      const data = await this.fetchData()
-      this.setState({ data, isFetching : false })
+      const [data, nationalData] = await Promise.all([this.fetchRegionalData(), this.fetchNationalData()])
+      this.setState({ data, nationalData, isFetching : false })
     } catch (e) {
       this.setState({
         fetchError : "Problème de chargement des données",
@@ -85,12 +92,12 @@ class App extends React.Component {
               </h3>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col>
               <Form/>
             </Col>
-          </Row>
-          <h6>Cliquez et faites glissez pour zoomer sur une période restreinte</h6>
+          </Row> */}
+          {/* <h6>Cliquez et faites glissez pour zoomer sur une période restreinte</h6> */}
           <div className="chart" ref={ this.divChart }>
             { fetchError && <Alert variant="danger">{ fetchError }</Alert> }
             { isFetching ? <Spinner size="large"/> : null }

@@ -21,10 +21,10 @@ export default withDataContext(class Zones extends React.Component {
     }
 
     render() {
-
+        
         return (
             <Form.Group controlId="zone">
-                <Form.Label>Zones</Form.Label>
+                <Form.Label>Régions</Form.Label>
                 <Select
                     options={ this.getOptions() }
                     value={ this.props.zones }
