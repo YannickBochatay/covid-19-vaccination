@@ -1,0 +1,110 @@
+[
+  {
+    "date": "2021-01-11",
+    "code": "REG-3",
+    "nom": "Guyane",
+    "totalVaccines": 0
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-27",
+    "nom": "Bourgogne-Franche-Comté",
+    "totalVaccines": 7114
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-24",
+    "nom": "Centre-Val de Loire",
+    "totalVaccines": 4257
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-32",
+    "nom": "Hauts-de-France",
+    "totalVaccines": 10162
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-44",
+    "nom": "Grand Est",
+    "totalVaccines": 11335
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-75",
+    "nom": "Nouvelle-Aquitaine",
+    "totalVaccines": 18841
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-28",
+    "nom": "Normandie",
+    "totalVaccines": 12300
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-1",
+    "nom": "Guadeloupe",
+    "totalVaccines": 96
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-53",
+    "nom": "Bretagne",
+    "totalVaccines": 4534
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-93",
+    "nom": "Provence-Alpes-Côte d'Azur",
+    "totalVaccines": 6726
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-76",
+    "nom": "Occitanie",
+    "totalVaccines": 12582
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-11",
+    "nom": "Île-de-France",
+    "totalVaccines": 30248
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-2",
+    "nom": "Martinique",
+    "totalVaccines": 159
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-94",
+    "nom": "Corse",
+    "totalVaccines": 958
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-4",
+    "nom": "La Réunion",
+    "totalVaccines": 0
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-52",
+    "nom": "Pays de la Loire",
+    "totalVaccines": 7002
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-84",
+    "nom": "Auvergne-Rhône-Alpes",
+    "totalVaccines": 12037
+  },
+  {
+    "date": "2021-01-11",
+    "code": "REG-6",
+    "nom": "Mayotte",
+    "totalVaccines": 0
+  }
+]
