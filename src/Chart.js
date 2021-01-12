@@ -99,6 +99,7 @@ export default withDataContext(class Chart extends React.Component {
                 useHTML: true,
                 formatter: function() {
                     const series = this.series.chart.series
+                    const footerStyle = "padding-top:15px;color:white;font-size:16px"
 
                     let html = `<div style="color:white;text-align:center">
                         ${new Date(this.x).toLocaleDateString()}
@@ -116,8 +117,8 @@ export default withDataContext(class Chart extends React.Component {
                     }, "")
 
                     html += `<tr>
-                        <td style="padding-top:15px;color:white">Total France</td>
-                        <td style="padding-top:15px;text-align:right;color:white">${getNationalData(this.x)}</td>
+                        <td style="${footerStyle}">Total France</td>
+                        <td style="${footerStyle};text-align:right">${getNationalData(this.x)}</td>
                     </tr>
                     </table>`
 

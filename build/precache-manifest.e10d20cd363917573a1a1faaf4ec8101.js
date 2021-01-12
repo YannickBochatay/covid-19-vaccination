@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "66674ca72711424c7c60f51cf638a913",
+    "revision": "b09bb89bd2771a9c65bef129a6ea922c",
     "url": "/covid-19-vaccination/build/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/covid-19-vaccination/build/static/css/2.48f127ce.chunk.css"
   },
   {
-    "revision": "814a9b03672ec4c4dbb6",
+    "revision": "d56639794406fa636a0f",
     "url": "/covid-19-vaccination/build/static/css/main.45543df6.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/covid-19-vaccination/build/static/js/2.772b6dd2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "814a9b03672ec4c4dbb6",
-    "url": "/covid-19-vaccination/build/static/js/main.a9f99caf.chunk.js"
+    "revision": "d56639794406fa636a0f",
+    "url": "/covid-19-vaccination/build/static/js/main.9b457464.chunk.js"
   },
   {
     "revision": "fd04e126a967e8c5cf69",
