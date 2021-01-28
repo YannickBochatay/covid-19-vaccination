@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/covid-19-vaccination/build/static/css/main.45543df6.chunk.css",
-    "main.js": "/covid-19-vaccination/build/static/js/main.9b457464.chunk.js",
-    "main.js.map": "/covid-19-vaccination/build/static/js/main.9b457464.chunk.js.map",
+    "main.js": "/covid-19-vaccination/build/static/js/main.621af27c.chunk.js",
+    "main.js.map": "/covid-19-vaccination/build/static/js/main.621af27c.chunk.js.map",
     "runtime-main.js": "/covid-19-vaccination/build/static/js/runtime-main.45aac7e7.js",
     "runtime-main.js.map": "/covid-19-vaccination/build/static/js/runtime-main.45aac7e7.js.map",
     "static/css/2.48f127ce.chunk.css": "/covid-19-vaccination/build/static/css/2.48f127ce.chunk.css",
-    "static/js/2.772b6dd2.chunk.js": "/covid-19-vaccination/build/static/js/2.772b6dd2.chunk.js",
-    "static/js/2.772b6dd2.chunk.js.map": "/covid-19-vaccination/build/static/js/2.772b6dd2.chunk.js.map",
+    "static/js/2.6cb7cca8.chunk.js": "/covid-19-vaccination/build/static/js/2.6cb7cca8.chunk.js",
+    "static/js/2.6cb7cca8.chunk.js.map": "/covid-19-vaccination/build/static/js/2.6cb7cca8.chunk.js.map",
     "index.html": "/covid-19-vaccination/build/index.html",
-    "precache-manifest.e10d20cd363917573a1a1faaf4ec8101.js": "/covid-19-vaccination/build/precache-manifest.e10d20cd363917573a1a1faaf4ec8101.js",
+    "precache-manifest.2355d44b23ac01b71c118be8eb6a9f61.js": "/covid-19-vaccination/build/precache-manifest.2355d44b23ac01b71c118be8eb6a9f61.js",
     "service-worker.js": "/covid-19-vaccination/build/service-worker.js",
     "static/css/2.48f127ce.chunk.css.map": "/covid-19-vaccination/build/static/css/2.48f127ce.chunk.css.map",
     "static/css/main.45543df6.chunk.css.map": "/covid-19-vaccination/build/static/css/main.45543df6.chunk.css.map",
-    "static/js/2.772b6dd2.chunk.js.LICENSE.txt": "/covid-19-vaccination/build/static/js/2.772b6dd2.chunk.js.LICENSE.txt"
+    "static/js/2.6cb7cca8.chunk.js.LICENSE.txt": "/covid-19-vaccination/build/static/js/2.6cb7cca8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.45aac7e7.js",
     "static/css/2.48f127ce.chunk.css",
-    "static/js/2.772b6dd2.chunk.js",
+    "static/js/2.6cb7cca8.chunk.js",
     "static/css/main.45543df6.chunk.css",
-    "static/js/main.9b457464.chunk.js"
+    "static/js/main.621af27c.chunk.js"
   ]
 }

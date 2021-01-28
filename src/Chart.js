@@ -29,23 +29,23 @@ export default withDataContext(class Chart extends React.Component {
     getNationalData = date => {
         const YYYYMMDD = moment(date).format("YYYY-MM-DD")
 
-        return this.props.nationalData.find(item => item.date === YYYYMMDD)?.total_vaccines || NaN
+        return this.props.nationalData.find(item => item.jour === YYYYMMDD)?.n_cum_dose1 || NaN
     }
 
     setSeries() {
         const { zones, data, dateRange } = this.props
 
         const series = []
-        
+
         zones?.forEach(zone => {
             const dataZone = data
-            .filter(item => item.code === zone?.value)
-            .filter(item => moment(item.date) >= dateRange?.startDate)
-            .filter(item => moment(item.date) <= dateRange?.endDate)
+            .filter(item => Number(item.reg) === Number(zone?.value))
+            .filter(item => moment(item.jour) >= dateRange?.startDate)
+            .filter(item => moment(item.jour) <= dateRange?.endDate)
             
             series.push({
                 name :  zone?.label,
-                data : dataZone.map(item => [Number(new Date(item.date)), Number(item.totalVaccines)] )
+                data : dataZone.map(item => [Number(new Date(item.jour)), Number(item.n_cum_dose1)] )
             })
         })
 
@@ -107,7 +107,8 @@ export default withDataContext(class Chart extends React.Component {
                     <table>`
 
                     html += series.reduce((s, serie) => {
-                        const point = serie.points[this.point.index]
+                        const point = serie.points.find(pt => pt.x === this.x)
+                        if (!point) return s
                         return s + `<tr style="${serie === this.series ? "border:1px solid white" : ""}">
                             <td style="color:${point.series.color}">
                                 ${point.series.name}

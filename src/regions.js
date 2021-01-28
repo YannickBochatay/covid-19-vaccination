@@ -1,74 +1,74 @@
 export default [
     {
       "label": "Auvergne-Rhône-Alpes",
-      "value": "REG-84"
+      "value": "84"
     },
     {
       "label": "Bourgogne-Franche-Comté",
-      "value": "REG-27"
+      "value": "27"
     },
     {
       "label": "Bretagne",
-      "value": "REG-53"
+      "value": "53"
     },
     {
       "label": "Centre-Val de Loire",
-      "value": "REG-24"
+      "value": "24"
     },
     {
       "label": "Corse",
-      "value": "REG-94"
+      "value": "94"
     },
     {
       "label": "Grand Est",
-      "value": "REG-44"
+      "value": "44"
     },
     {
       "label": "Guadeloupe",
-      "value": "REG-01"
+      "value": "01"
     },
     {
       "label": "Guyane",
-      "value": "REG-03"
+      "value": "03"
     },
     {
       "label": "Hauts-de-France",
-      "value": "REG-32"
+      "value": "32"
     },
     {
       "label": "Île-de-France",
-      "value": "REG-11"
+      "value": "11"
     },
     {
       "label": "La Réunion",
-      "value": "REG-04"
+      "value": "04"
     },
     {
       "label": "Martinique",
-      "value": "REG-02"
+      "value": "02"
     },
     {
       "label": "Mayotte",
-      "value": "REG-06"
+      "value": "06"
     },
     {
       "label": "Normandie",
-      "value": "REG-28"
+      "value": "28"
     },
     {
       "label": "Nouvelle-Aquitaine",
-      "value": "REG-75"
+      "value": "75"
     },
     {
       "label": "Occitanie",
-      "value": "REG-76"
+      "value": "76"
     },
     {
       "label": "Pays de la Loire",
-      "value": "REG-52"
+      "value": "52"
     },
     {
       "label": "Provence-Alpes-Côte d'Azur",
-      "value": "REG-93"
+      "value": "93"
     }
   ]
