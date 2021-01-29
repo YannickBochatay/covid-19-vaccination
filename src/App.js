@@ -5,20 +5,24 @@ import Row from "react-bootstrap/Row"
 import Alert from "react-bootstrap/Alert"
 import Spinner from 'reactjs-simple-spinner'
 import DataContext from "./DataContext"
+import Form from "./Form"
 import Chart from "./Chart"
 import Twitter from "./Twitter"
 import moment from "moment"
 import zones from "./regions"
+import ageGroups from "./ageGroups"
 
 const storagePrefix = "vaccination-"
 class App extends React.Component {
 
   state = {
-    data : [],
+    data : { byReg : [], byAge : [] },
     nationalData : [],
     zones : /* this.getLocalData("zones") || */ zones,
     dateRange : /* this.getLocalData("dateRange") || */ { startDate : moment("2021-01-01"), endDate : moment() },
     scale : /* this.getLocalData("scale") || */ "linear",
+    groupBy : this.getLocalData("groupBy") || "reg",
+    ageGroups,
     chartHeight : null,
     isFetching : false,
     fetchError : null
@@ -43,36 +47,61 @@ class App extends React.Component {
     }
   }
 
-  calculateTotals(data) {
-    const regs = [...new Set(data.map(item => item.reg || item.fra))]
+  processData(data) {
 
-    return regs.reduce((dataWithTotals, reg) => {
-      const dataset = data.filter(item => item.reg === reg || item.fra === reg)
+    data = data.filter(item => item.clage_vacsi !== "0") // toutes catégories d'âge
 
-      dataset.sort((a, b) => a.jour < b.jour ? -1 : 1)
+    const regs = [...new Set(data.map(item => item.reg))].sort()
+    const ageGroups = [...new Set(data.map(item => item.clage_vacsi))].sort()
+    const dates = [...new Set(data.map(item => item.jour))].sort()
 
-      dataset.reduce((cum, item) => {
-        cum += Number(item.n_dose1)
-        item.n_cum_dose1 = cum
-        return cum
-      }, 0)
+    const byReg = []
+    const byAge = []
 
-      return dataWithTotals.concat(dataset)
-    }, [])
+    dates.forEach(jour => {
+      const dataByDate = data.filter(item => item.jour === jour)
+      regs.forEach(reg => {
+        const dataByReg = dataByDate.filter(item => item.reg === reg)
+        const n_dose1 = dataByReg.reduce((sum, item) => sum + Number(item.n_dose1), 0)
+        byReg.push({ reg, jour, n_dose1 })
+      })
+      ageGroups.forEach(clage_vacsi => {
+        const dataByAge = dataByDate.filter(item => item.clage_vacsi === clage_vacsi)
+        const n_dose1 = dataByAge.reduce((sum, item) => sum + Number(item.n_dose1), 0)
+        byAge.push({ clage_vacsi, jour, n_dose1 })
+      })
+    })
+
+    regs.forEach(reg => {
+      byReg
+        .filter(item => item.reg === reg)
+        .reduce((cum, item) => {
+          cum += Number(item.n_dose1)
+          item.n_cum_dose1 = cum
+          return cum
+        }, 0)
+    })
+
+    ageGroups.forEach(clage_vacsi => {
+      byAge
+        .filter(item => item.clage_vacsi === clage_vacsi)
+        .reduce((cum, item) => {
+          cum += Number(item.n_dose1)
+          item.n_cum_dose1 = cum
+          return cum
+        }, 0)
+    })
+
+    return { byAge, byReg }
   }
 
-  fillMissingData(data) {
-
-    const endDate = moment().subtract(2, "days")
-
-    for (let i = moment("2021-01-01"); i <= endDate; i = i.add(1, 'days')) {
-      zones.forEach(({ value }) => {
-        const jour = i.format("YYYY-MM-DD")
-        if (!data.find(item => item.reg === value && item.jour === jour)) {
-          data.push({ reg : value, jour, n_dose1 : 0 })
-        }
-      })
-    }
+  processNationalData([...data]) {
+    data.sort((a, b) => a.jour < b.jour ? -1 : 1)
+    data.reduce((cum, item) => {
+      cum += Number(item.n_dose1)
+      item.n_cum_dose1 = cum
+      return cum
+    }, 0)
 
     return data
   }
@@ -81,7 +110,7 @@ class App extends React.Component {
     const lines = csvData.trim().split(/[\r\n]+/)
     const colnames = lines.shift().trim().split(/;/)
 
-    let data = lines.map(line => {
+    return lines.map(line => {
       const fields = line.trim().split(/;/)
       const item = {}
       
@@ -89,25 +118,22 @@ class App extends React.Component {
 
       return item
     })
-
-    // data = this.fillMissingData(data)
-
-    if (colnames.includes("n_cum_dose1")) return data
-    else return this.calculateTotals(data)
   }
 
-  async fetchRegionalData() {
-    const res = await fetch("https://www.data.gouv.fr/fr/datasets/r/735b0df8-51b4-4dd2-8a2d-8e46d77d60d8")
+  async fetchData() {
+    const res = await fetch("https://www.data.gouv.fr/fr/datasets/r/c3ccc72a-a945-494b-b98d-09f48aa25337")
     const csv = await res.text()
+    const data = this.parseCSV(csv)
 
-    return this.parseCSV(csv)
+    return this.processData(data)    
   }
 
   async fetchNationalData() {
     const res = await fetch("https://www.data.gouv.fr/fr/datasets/r/efe23314-67c4-45d3-89a2-3faef82fae90")
     const csv = await res.text()
+    const data = this.parseCSV(csv)
 
-    return this.parseCSV(csv)
+    return ("n_cum_dose1" in data[0]) ? data : this.processNationalData(data)
   }
 
   async componentDidMount() {
@@ -115,7 +141,8 @@ class App extends React.Component {
     this.setState({ chartHeight, isFetching : true })
 
     try {
-      const [data, nationalData] = await Promise.all([this.fetchRegionalData(), this.fetchNationalData()])
+      const promises = [this.fetchData(), this.fetchNationalData()]
+      const [data, nationalData] = await Promise.all(promises)
       this.setState({ data, nationalData, isFetching : false })
     } catch (e) {
       this.setState({
@@ -149,11 +176,11 @@ class App extends React.Component {
               </h3>
             </Col>
           </Row>
-          {/* <Row>
+          <Row>
             <Col>
               <Form/>
             </Col>
-          </Row> */}
+          </Row>
           {/* <h6>Cliquez et faites glissez pour zoomer sur une période restreinte</h6> */}
           <div className="chart" ref={ this.divChart }>
             { fetchError && <Alert variant="danger">{ fetchError }</Alert> }

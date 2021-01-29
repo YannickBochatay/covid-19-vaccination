@@ -33,19 +33,21 @@ export default withDataContext(class Chart extends React.Component {
     }
 
     setSeries() {
-        const { zones, data, dateRange } = this.props
+        const { zones, ageGroups, data, groupBy, dateRange } = this.props
 
         const series = []
+        const groups = (groupBy === "reg") ? zones : ageGroups
+        const dataset = (groupBy === "reg") ? data.byReg : data.byAge
 
-        zones?.forEach(zone => {
-            const dataZone = data
-            .filter(item => Number(item.reg) === Number(zone?.value))
+        groups?.forEach(group => {
+            const dataGroup = dataset
+            .filter(item => Number(item[groupBy]) === Number(group?.value))
             .filter(item => moment(item.jour) >= dateRange?.startDate)
             .filter(item => moment(item.jour) <= dateRange?.endDate)
             
             series.push({
-                name :  zone?.label,
-                data : dataZone.map(item => [Number(new Date(item.jour)), Number(item.n_cum_dose1)] )
+                name :  group?.label,
+                data : dataGroup.map(item => [Number(new Date(item.jour)), Number(item.n_cum_dose1)] )
             })
         })
 

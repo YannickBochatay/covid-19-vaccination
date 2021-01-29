@@ -19,7 +19,7 @@ export default withDataContext(class GroupBy extends React.Component {
                     onChange={ this.handleChange }
                 >
                     <ToggleButton variant="light" value="reg">région</ToggleButton>
-                    <ToggleButton variant="light" value="age">tranche d'âge</ToggleButton>
+                    <ToggleButton variant="light" value="clage_vacsi">tranche d'âge</ToggleButton>
                 </ToggleButtonGroup>
             </Form.Group>
         )
