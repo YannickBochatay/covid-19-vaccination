@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/covid-19-vaccination/build/static/css/main.45543df6.chunk.css",
-    "main.js": "/covid-19-vaccination/build/static/js/main.09c92731.chunk.js",
-    "main.js.map": "/covid-19-vaccination/build/static/js/main.09c92731.chunk.js.map",
+    "main.js": "/covid-19-vaccination/build/static/js/main.ad97703f.chunk.js",
+    "main.js.map": "/covid-19-vaccination/build/static/js/main.ad97703f.chunk.js.map",
     "runtime-main.js": "/covid-19-vaccination/build/static/js/runtime-main.45aac7e7.js",
     "runtime-main.js.map": "/covid-19-vaccination/build/static/js/runtime-main.45aac7e7.js.map",
-    "static/css/2.48f127ce.chunk.css": "/covid-19-vaccination/build/static/css/2.48f127ce.chunk.css",
-    "static/js/2.a1af886b.chunk.js": "/covid-19-vaccination/build/static/js/2.a1af886b.chunk.js",
-    "static/js/2.a1af886b.chunk.js.map": "/covid-19-vaccination/build/static/js/2.a1af886b.chunk.js.map",
+    "static/css/2.92a07ee8.chunk.css": "/covid-19-vaccination/build/static/css/2.92a07ee8.chunk.css",
+    "static/js/2.a851acda.chunk.js": "/covid-19-vaccination/build/static/js/2.a851acda.chunk.js",
+    "static/js/2.a851acda.chunk.js.map": "/covid-19-vaccination/build/static/js/2.a851acda.chunk.js.map",
     "index.html": "/covid-19-vaccination/build/index.html",
-    "precache-manifest.53e139a884fb999a56b2bb5db73cecc2.js": "/covid-19-vaccination/build/precache-manifest.53e139a884fb999a56b2bb5db73cecc2.js",
+    "precache-manifest.21897b1394b24eaa3f7d6f156cdafc42.js": "/covid-19-vaccination/build/precache-manifest.21897b1394b24eaa3f7d6f156cdafc42.js",
     "service-worker.js": "/covid-19-vaccination/build/service-worker.js",
-    "static/css/2.48f127ce.chunk.css.map": "/covid-19-vaccination/build/static/css/2.48f127ce.chunk.css.map",
+    "static/css/2.92a07ee8.chunk.css.map": "/covid-19-vaccination/build/static/css/2.92a07ee8.chunk.css.map",
     "static/css/main.45543df6.chunk.css.map": "/covid-19-vaccination/build/static/css/main.45543df6.chunk.css.map",
-    "static/js/2.a1af886b.chunk.js.LICENSE.txt": "/covid-19-vaccination/build/static/js/2.a1af886b.chunk.js.LICENSE.txt"
+    "static/js/2.a851acda.chunk.js.LICENSE.txt": "/covid-19-vaccination/build/static/js/2.a851acda.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.45aac7e7.js",
-    "static/css/2.48f127ce.chunk.css",
-    "static/js/2.a1af886b.chunk.js",
+    "static/css/2.92a07ee8.chunk.css",
+    "static/js/2.a851acda.chunk.js",
     "static/css/main.45543df6.chunk.css",
-    "static/js/main.09c92731.chunk.js"
+    "static/js/main.ad97703f.chunk.js"
   ]
 }

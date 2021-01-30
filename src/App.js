@@ -47,7 +47,7 @@ class App extends React.Component {
     }
   }
 
-  processData(data) {
+  processData(data, hasCum) {
 
     data = data.filter(item => item.clage_vacsi !== "0") // toutes catégories d'âge
 
@@ -63,34 +63,39 @@ class App extends React.Component {
       regs.forEach(reg => {
         const dataByReg = dataByDate.filter(item => item.reg === reg)
         const n_dose1 = dataByReg.reduce((sum, item) => sum + Number(item.n_dose1), 0)
-        byReg.push({ reg, jour, n_dose1 })
+        const n_cum_dose1 = hasCum && dataByReg.reduce((sum, item) => sum + Number(item.n_cum_dose1), 0)
+        byReg.push({ reg, jour, n_dose1, n_cum_dose1 })
       })
       ageGroups.forEach(clage_vacsi => {
         const dataByAge = dataByDate.filter(item => item.clage_vacsi === clage_vacsi)
         const n_dose1 = dataByAge.reduce((sum, item) => sum + Number(item.n_dose1), 0)
-        byAge.push({ clage_vacsi, jour, n_dose1 })
+        const n_cum_dose1 = hasCum && dataByAge.reduce((sum, item) => sum + Number(item.n_cum_dose1), 0)
+        byAge.push({ clage_vacsi, jour, n_dose1, n_cum_dose1 })
       })
     })
 
-    regs.forEach(reg => {
-      byReg
-        .filter(item => item.reg === reg)
-        .reduce((cum, item) => {
-          cum += Number(item.n_dose1)
-          item.n_cum_dose1 = cum
-          return cum
-        }, 0)
-    })
+    if (!hasCum) {
 
-    ageGroups.forEach(clage_vacsi => {
-      byAge
-        .filter(item => item.clage_vacsi === clage_vacsi)
-        .reduce((cum, item) => {
-          cum += Number(item.n_dose1)
-          item.n_cum_dose1 = cum
-          return cum
-        }, 0)
-    })
+      regs.forEach(reg => {
+        byReg
+          .filter(item => item.reg === reg)
+          .reduce((cum, item) => {
+            cum += Number(item.n_dose1)
+            item.n_cum_dose1 = cum
+            return cum
+          }, 0)
+      })
+
+      ageGroups.forEach(clage_vacsi => {
+        byAge
+          .filter(item => item.clage_vacsi === clage_vacsi)
+          .reduce((cum, item) => {
+            cum += Number(item.n_dose1)
+            item.n_cum_dose1 = cum
+            return cum
+          }, 0)
+      })
+    }
 
     return { byAge, byReg }
   }
@@ -108,10 +113,10 @@ class App extends React.Component {
 
   parseCSV(csvData) {
     const lines = csvData.trim().split(/[\r\n]+/)
-    const colnames = lines.shift().trim().split(/;/)
+    const colnames = lines.shift().trim().split(/[;,]/)
 
     return lines.map(line => {
-      const fields = line.trim().split(/;/)
+      const fields = line.trim().split(/[;,]/)
       const item = {}
       
       colnames.forEach((col, i) => item[col] = fields[i])
@@ -121,19 +126,21 @@ class App extends React.Component {
   }
 
   async fetchData() {
-    const res = await fetch("https://www.data.gouv.fr/fr/datasets/r/c3ccc72a-a945-494b-b98d-09f48aa25337")
+    let res = await fetch("https://www.data.gouv.fr/fr/datasets/r/c3ccc72a-a945-494b-b98d-09f48aa25337")
     const csv = await res.text()
     const data = this.parseCSV(csv)
+    const hasCum = ("n_cum_dose1" in data[0])
 
-    return this.processData(data)    
+    return this.processData(data, hasCum)    
   }
 
   async fetchNationalData() {
     const res = await fetch("https://www.data.gouv.fr/fr/datasets/r/efe23314-67c4-45d3-89a2-3faef82fae90")
     const csv = await res.text()
     const data = this.parseCSV(csv)
+    const hasCum = ("n_cum_dose1" in data[0])
 
-    return ("n_cum_dose1" in data[0]) ? data : this.processNationalData(data)
+    return hasCum ? data : this.processNationalData(data)
   }
 
   async componentDidMount() {
